@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nusantara HRIS by Amaluddin Akbar</title>
+<style>
+:root{--bg:#f4f6fb;--sf:rgba(255,255,255,.8);--so:#fff;--tx:#1b2238;--mu:#6b7490;--bd:#e3e7f1;--pr:#3d5afe;--pr2:#e8ecff;--ok:#16a34a;--wa:#d97706;--er:#dc2626;--sh:0 2px 10px rgba(30,40,90,.07);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1220;--sf:rgba(24,28,48,.8);--so:#181c30;--tx:#e8ebf7;--mu:#9aa3c2;--bd:#2a3050;--pr:#7c93ff;--pr2:#252c55;--sh:none;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0f1220;--sf:rgba(24,28,48,.8);--so:#181c30;--tx:#e8ebf7;--mu:#9aa3c2;--bd:#2a3050;--pr:#7c93ff;--pr2:#252c55;--sh:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.app{display:flex;min-height:100vh}
+nav{width:215px;background:var(--sf);border-right:1px solid var(--bd);padding:18px 12px;position:sticky;top:0;height:100vh;flex-shrink:0}
+.logo{font-weight:800;font-size:18px;color:var(--pr);padding:4px 10px 16px}.logo small{display:block;font-weight:500;color:var(--mu);font-size:11px}
+nav button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--mu);padding:10px 12px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;margin-bottom:3px}
+nav button.on,nav button:hover{background:var(--pr2);color:var(--pr)}
+main{flex:1;padding:24px;min-width:0;max-width:1100px}
+h1{margin:0 0 4px;font-size:22px}.sub{color:var(--mu);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px;box-shadow:var(--sh)}
+.st b{display:block;font-size:24px}.st span{color:var(--mu);font-size:12px}
+.bar{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:13px}.bar i{display:block;height:10px;border-radius:6px;background:var(--pr)}.bar span:first-child{width:130px;color:var(--mu)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+input,select{font:inherit;padding:8px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--sf);color:var(--tx);max-width:100%}
+.btn{background:var(--pr);color:#fff;border:0;padding:8px 14px;border-radius:9px;font:inherit;font-weight:600;cursor:pointer}
+.btn.g{background:var(--pr2);color:var(--pr)}.btn.s{padding:4px 9px;font-size:12px}.btn.r{background:#fee2e2;color:var(--er)}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;background:var(--sf);border:1px solid var(--bd)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}th{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.03em}
+.tag{padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--pr2);color:var(--pr)}
+.tag.ok{background:#dcfce7;color:var(--ok)}.tag.wa{background:#fef3c7;color:var(--wa)}.tag.er{background:#fee2e2;color:var(--er)}
+.mo{position:fixed;inset:0;background:rgba(10,15,40,.5);display:none;align-items:center;justify-content:center;z-index:9;padding:16px}.mo.on{display:flex}
+.md{background:var(--so);border-radius:16px;padding:20px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
+.md label{display:block;font-size:12px;color:var(--mu);margin:10px 0 3px}.md input,.md select{width:100%}
+.note{font-size:12px;color:var(--mu);margin-top:10px}
+.kan{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.kan h4{margin:0 0 8px;font-size:13px}.kan .card{padding:10px;margin-bottom:8px}
+@media(max-width:760px){.app{flex-direction:column}nav{width:100%;height:auto;position:static;display:flex;overflow-x:auto;gap:4px;padding:8px}nav .logo{display:none}nav button{width:auto;white-space:nowrap;margin:0}main{padding:14px}}
+.bgfx{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--bg)}
+.bgfx::after{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--bd) 1.2px,transparent 1.2px);background-size:24px 24px;opacity:.7}
+.bgfx b{position:absolute;border-radius:50%;filter:blur(80px);opacity:.42;animation:fl 18s ease-in-out infinite alternate}
+.bgfx b:nth-child(1){width:440px;height:440px;background:#3d5afe;top:-120px;left:-100px}
+.bgfx b:nth-child(2){width:400px;height:400px;background:#e11d48;right:-120px;top:22%;animation-delay:-6s}
+.bgfx b:nth-child(3){width:380px;height:380px;background:#f59e0b;bottom:-140px;left:38%;animation-delay:-11s}
+@keyframes fl{to{transform:translate(70px,50px) scale(1.18)}}
+nav,.card,table{backdrop-filter:blur(10px)}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;background:linear-gradient(120deg,#2740e0,#6d28d9 60%,#be123c);color:#fff;border-radius:20px;padding:20px 26px;margin-bottom:18px;overflow:hidden;box-shadow:0 10px 30px rgba(61,90,254,.3)}
+.hart{width:310px;flex-shrink:0}
+.foot{display:flex;gap:12px;align-items:center;margin-top:28px;padding:16px 4px;border-top:1px solid var(--bd);color:var(--mu);font-size:12px;flex-wrap:wrap}.foot b{color:var(--tx)}.foot .btn{margin-left:auto}
+.scr{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:28px;overflow:auto;color:#fff;background:linear-gradient(125deg,#12134d,#2740e0,#6d28d9,#be123c);background-size:300% 300%;animation:gs 16s ease infinite}
+#bye{background:linear-gradient(125deg,#3b0a1e,#9f1239,#6d28d9,#12134d);background-size:300% 300%}
+@keyframes gs{50%{background-position:100% 50%}}
+.scr .o{position:absolute;border-radius:50%;background:rgba(255,255,255,.08);animation:fl 14s ease-in-out infinite alternate;pointer-events:none}
+.o1{width:300px;height:300px;top:-80px;left:-60px}.o2{width:220px;height:220px;bottom:-40px;right:12%;animation-delay:-5s}.o3{width:140px;height:140px;top:18%;right:6%;animation-delay:-9s}
+.wm{position:absolute;right:-120px;top:50%;transform:translateY(-50%);opacity:.07;pointer-events:none}
+.cv{position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:36px;max-width:1080px;width:100%;align-items:center}
+.cv>*{animation:up .9s both}.cv>*:nth-child(2){animation-delay:.2s}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.brand{display:flex;gap:14px;align-items:center;margin-bottom:18px}.eb{font-weight:700;letter-spacing:.04em}.eb2{font-size:12px;opacity:.75;margin-top:2px}
+.big{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:0;font-weight:800}.by{font-size:18px;font-weight:700;color:#ffd666;margin:6px 0 14px}
+.lead{max-width:520px;opacity:.92;font-size:15px;line-height:1.65}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 22px}.chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.btn.cta{background:#ffd666;color:#3b1d00;padding:12px 24px;font-size:15px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.28)}.btn.cta.g2{background:rgba(255,255,255,.16);color:#fff}
+.glass{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);border-radius:24px;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+@media(max-width:760px){.hart{display:none}.cv{grid-template-columns:1fr}.cv .glass{order:-1}.foot .btn{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+#auth{z-index:70;background:linear-gradient(125deg,#0f172a,#1e3a8a,#6d28d9,#9f1239);background-size:300% 300%}
+.af label{display:block;font-size:12px;opacity:.85;text-align:left}
+.af input{width:100%;margin:3px 0 11px;border:0;padding:10px 12px;background:rgba(255,255,255,.96);color:#111}
+.amsg{background:rgba(255,255,255,.18);padding:8px 12px;border-radius:10px;margin-bottom:12px;font-size:13px}
+.mail{background:#fff;color:#111;border-radius:12px;padding:10px 12px;text-align:left;margin:8px 0 12px;font-size:13px}
+.usr{font-size:12px;color:var(--mu);padding:12px 12px 4px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script></head><body>
+<div class="bgfx"><b></b><b></b><b></b></div>
+<div class="app"><nav id="nav"></nav><main id="main"></main></div>
+<div class="scr" id="cover"></div><div class="scr" id="bye" style="display:none"></div><div class="scr" id="auth" style="display:none"></div>
+<div class="mo" id="mo"><div class="md" id="md"></div></div>
+<script>
+const G=(s)=>`<svg width="${s}" height="${s}" viewBox="0 0 100 100" role="img" aria-label="Logo Garuda Nusantara"><circle cx="50" cy="50" r="47" fill="#9f1239"/><circle cx="50" cy="50" r="43" fill="none" stroke="#f5b50a" stroke-width="2"/><g fill="#f5b50a"><circle cx="50" cy="31" r="5.5"/><path d="M54 29l8 4-8 3z"/><path d="M50 38c-5 2-7 9-7 15l3 14h8l3-14c0-6-2-13-7-15z"/><path d="M44 43C34 37 22 37 11 44c8 0 12 3 14 6-6-1-11 1-15 5 6 0 10 2 13 6-4 0-8 2-10 6 8-2 14-1 20 2z"/><path transform="translate(100 0) scale(-1 1)" d="M44 43C34 37 22 37 11 44c8 0 12 3 14 6-6-1-11 1-15 5 6 0 10 2 13 6-4 0-8 2-10 6 8-2 14-1 20 2z"/><path d="M45 70l-6 14 11-6 11 6-6-14z"/></g></svg>`;
+const PER=(x,y,c)=>`<g transform="translate(${x} ${y})"><rect x="-13" y="13" width="26" height="32" rx="10" fill="${c}"/><circle r="11" fill="#f1c9a5"/><path d="M-11-1C-9-14 9-14 11-1c-6-4-16-4-22 0z" fill="#2b2118"/></g>`;
+const DESK=(x,y)=>`<rect x="${x}" y="${y}" width="86" height="8" rx="3" fill="#8b5e34"/><rect x="${x+8}" y="${y+8}" width="5" height="32" fill="#6b4423"/><rect x="${x+73}" y="${y+8}" width="5" height="32" fill="#6b4423"/><rect x="${x+26}" y="${y-22}" width="34" height="22" rx="3" fill="#334155"/><rect x="${x+29}" y="${y-19}" width="28" height="16" rx="2" fill="#7dd3fc"/>`;
+const ART=()=>{let w='',sk='';for(let r=0;r<8;r++)for(let c=0;c<5;c++)w+=`<rect x="${52+c*21}" y="${90+r*20}" width="13" height="12" rx="2" fill="${(r*3+c*5)%7<3?'#ffe08a':'#b9c8ff'}"/>`;
+[[8,190,30],[176,170,24],[184,205,18]].forEach(([x,y,wd])=>{sk+=`<rect x="${x}" y="${y}" width="${wd}" height="${280-y}" fill="#a9bcf0"/>`});
+return`<svg viewBox="0 0 540 320" style="width:100%;height:auto;display:block" role="img" aria-label="Ilustrasi gedung perusahaan dan karyawan yang sedang bekerja"><rect width="540" height="320" rx="18" fill="#d6e4ff"/><circle cx="490" cy="44" r="22" fill="#ffd666"/><ellipse cx="300" cy="40" rx="36" ry="11" fill="#fff" opacity=".85"/><ellipse cx="330" cy="34" rx="24" ry="9" fill="#fff" opacity=".85"/>${sk}
+<rect x="0" y="280" width="540" height="40" fill="#8aa0c8"/><rect x="0" y="280" width="540" height="5" fill="#6f86b3"/>
+<rect x="42" y="64" width="120" height="216" rx="4" fill="#3d5afe"/>${w}<rect x="86" y="250" width="32" height="30" rx="3" fill="#1e2a78"/><rect x="52" y="40" width="100" height="22" rx="5" fill="#fff"/><text x="102" y="56" text-anchor="middle" font-family="system-ui,Arial" font-weight="800" font-size="12" fill="#1e2a78">NUSANTARA</text>
+<rect x="100" y="14" width="3" height="26" fill="#475569"/><rect x="103" y="14" width="26" height="8" fill="#dc2626"/><rect x="103" y="22" width="26" height="8" fill="#fff"/>
+<rect x="196" y="96" width="326" height="184" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/><rect x="196" y="268" width="326" height="12" fill="#cbd5e1"/>
+<rect x="212" y="108" width="82" height="52" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="222" y="138" width="10" height="16" fill="#3d5afe"/><rect x="238" y="126" width="10" height="28" fill="#f59e0b"/><rect x="254" y="132" width="10" height="22" fill="#16a34a"/><rect x="270" y="116" width="10" height="38" fill="#be123c"/>
+<rect x="318" y="108" width="70" height="52" rx="4" fill="#bfe3ff"/><line x1="353" y1="108" x2="353" y2="160" stroke="#fff" stroke-width="3"/><text x="458" y="126" text-anchor="middle" font-family="system-ui,Arial" font-weight="700" font-size="11" fill="#64748b">People &amp; Culture</text>
+${PER(258,184,'#3d5afe')}${DESK(214,236)}${PER(372,184,'#be123c')}${DESK(328,236)}
+<rect x="452" y="226" width="9" height="42" fill="#334155"/><rect x="468" y="226" width="9" height="42" fill="#334155"/>${PER(464,184,'#f59e0b')}<rect x="476" y="204" width="20" height="26" rx="2" fill="#fff" stroke="#94a3b8"/>
+<rect x="500" y="246" width="12" height="22" rx="2" fill="#a16207"/><circle cx="506" cy="238" r="12" fill="#22a06b"/></svg>`};
+const hero=()=>`<div class="hero"><div><div style="opacity:.85;font-size:12px">Selamat datang di</div><h2 style="margin:2px 0;font-size:26px">Nusantara HRIS</h2><div style="font-weight:700;color:#ffd666">by Amaluddin Akbar</div><p style="max-width:380px;opacity:.92;margin:8px 0 0">Kelola karyawan, absensi, cuti, penggajian, rekrutmen, dan screening CV dalam satu tempat.</p></div><div class="hart">${ART()}</div></div>`;
+const foot=()=>`<footer class="foot">${G(36)}<div><b>Nusantara HRIS</b> by Amaluddin Akbar<br><span>© 2026 · Sistem informasi SDM untuk perusahaan swasta nasional · Data tersimpan di browser perangkat ini</span></div><button class="btn g s" onclick="showBye()">Penutup</button></footer>`;
+function initScreens(){const ch=['Karyawan','Absensi','Cuti','Penggajian','Rekrutmen','Screening CV'].map(x=>`<span>${x}</span>`).join('');
+$('cover').innerHTML=`<div class="o o1"></div><div class="o o2"></div><div class="o o3"></div><div class="wm">${G(560)}</div><div class="cv"><div>
+<div class="brand">${G(64)}<div><div class="eb">${esc(S.co.nama)}</div><div class="eb2">Human Resource Information System</div></div></div>
+<h1 class="big">Nusantara HRIS</h1><div class="by">by Amaluddin Akbar</div>
+<p class="lead">Sistem informasi sumber daya manusia untuk perusahaan swasta nasional. Kelola data karyawan, kehadiran, cuti, gaji, rekrutmen, dan seleksi CV dengan mudah, rapi, dan transparan.</p>
+<div class="chips">${ch}</div><button class="btn cta" onclick="enter()">Masuk ke Aplikasi →</button></div>
+<div class="glass">${ART()}</div></div>`;
+$('bye').innerHTML=`<div class="o o1"></div><div class="o o2"></div><div class="wm">${G(560)}</div><div class="cv" style="text-align:center;grid-template-columns:1fr;max-width:640px">${G(84).replace('<svg','<svg style="margin:0 auto"')}
+<h1 class="big" style="font-size:40px">Terima kasih</h1><div class="by">Nusantara HRIS by Amaluddin Akbar</div><p class="lead" style="margin:0 auto">Semoga pengelolaan SDM perusahaan Anda semakin tertata, cepat, dan transparan. Data tersimpan di browser perangkat ini, jadi ekspor data penting secara berkala.</p>
+<div class="glass" style="max-width:420px;margin:0 auto">${ART()}</div><div class="tools" style="justify-content:center"><button class="btn cta" onclick="hideScr('bye')">← Kembali ke Aplikasi</button><button class="btn cta g2" onclick="showCover()">Ke Halaman Cover</button></div><div class="eb2">© 2026 Nusantara HRIS · Amaluddin Akbar</div></div>`}
+function hideScr(id){$(id).style.display='none';window.scrollTo(0,0)}
+function showCover(){$('bye').style.display='none';$('cover').style.display='flex';$('cover').scrollTop=0}
+function showBye(){$('cover').style.display='none';$('bye').style.display='flex';$('bye').scrollTop=0}
+const K='nusantara-hris-v1',fmt=n=>'Rp '+Math.round(n).toLocaleString('id-ID'),today=()=>new Date().toISOString().slice(0,10);
+const DEPT=['Operasional','Keuangan','HR & GA','Sales & Marketing','IT','Produksi'];
+const demo=()=>({emp:[
+{id:1,nik:'X-001',nama:'Budi Santoso',jab:'Manager Operasional',dept:'Operasional',join:'2019-03-01',gaji:15000000,tunj:3000000,ptkp:'K/2',status:'Tetap',sisa:12},
+{id:2,nik:'X-002',nama:'Siti Rahmawati',jab:'HR Supervisor',dept:'HR & GA',join:'2020-07-15',gaji:11000000,tunj:2000000,ptkp:'TK/0',status:'Tetap',sisa:12},
+{id:3,nik:'X-003',nama:'Agus Wijaya',jab:'Staf Akuntansi',dept:'Keuangan',join:'2022-01-10',gaji:7500000,tunj:1000000,ptkp:'K/1',status:'Tetap',sisa:10},
+{id:4,nik:'X-004',nama:'Dewi Lestari',jab:'Sales Executive',dept:'Sales & Marketing',join:'2023-05-02',gaji:6500000,tunj:1500000,ptkp:'TK/0',status:'Kontrak',sisa:8},
+{id:5,nik:'X-005',nama:'Rizky Pratama',jab:'IT Support',dept:'IT',join:'2024-02-19',gaji:7000000,tunj:500000,ptkp:'TK/0',status:'Kontrak',sisa:12},
+{id:6,nik:'X-006',nama:'Yuni Handayani',jab:'Operator Produksi',dept:'Produksi',join:'2025-08-01',gaji:5200000,tunj:600000,ptkp:'K/0',status:'Probation',sisa:12}],
+leave:[{id:1,emp:4,jenis:'Cuti Tahunan',mulai:'2026-11-10',hari:3,ket:'Acara keluarga',st:'Menunggu'}],
+att:{},cand:[{id:1,nama:'Andi Firmansyah',posisi:'Staf Akuntansi',tahap:'Interview HR'},{id:2,nama:'Maya Putri',posisi:'Sales Executive',tahap:'Screening'},{id:3,nama:'Doni Kurniawan',posisi:'IT Support',tahap:'Penawaran'}],nid:50});
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}S=S||demo();
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id),E=id=>S.emp.find(e=>e.id==id)||{nama:'(dihapus)'};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let view='dash',q='',attDate=today(),pm=today().slice(0,7);
+const V={dash:'Dasbor',emp:'Karyawan',att:'Absensi',leave:'Cuti',pay:'Penggajian',rec:'Rekrutmen',scr:'Screening CV',set:'Pengaturan'};
+function nav(){$('nav').innerHTML=`<div class="logo"><span style="display:flex;gap:8px;align-items:center">${G(34)}Nusantara HRIS</span><small>by Amaluddin Akbar</small><small>${esc(S.co.nama)}</small></div>`+Object.entries(V).map(([k,v])=>`<button class="${k==view?'on':''}" onclick="go('${k}')">${v}</button>`).join('')+(me.role=='Admin'?'<button onclick="reset()" style="margin-top:14px">↺ Reset data demo</button>':'')+'<button onclick="showCover()">⌂ Halaman cover</button><button onclick="showBye()">✦ Penutup</button><div class="usr">'+esc(me.nama)+' · '+me.role+'</div><button onclick="logout()">⎋ Keluar</button>'}
+function ask(msg,fn,ok){$('md').oninput=null;$('md').innerHTML=`<h3 style="margin:0 0 8px">Konfirmasi</h3><p style="margin:0 0 16px">${esc(msg)}</p><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn g" onclick="closeM()">Batal</button><button class="btn r" id="yes">${ok||'Hapus'}</button></div>`;$('mo').classList.add('on');$('yes').onclick=()=>{closeM();fn()}}
+function toast(m){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:10px;z-index:99;max-width:90%;white-space:pre-line;box-shadow:0 4px 16px rgba(0,0,0,.3)';document.body.appendChild(t)}t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>{t.style.display='none'},4000)}
+function go(v){view=v;q='';render()}
+function reset(){ask('Kembalikan ke data demo? Semua perubahan akan hilang.',()=>{const co=S.co;S=demo();S.co=co;init();save();render()},'Reset')}
+function render(){if(!authed)return;nav();$('main').innerHTML=R[view]()+foot()}
+function modal(title,fields,vals,onOk,prev){
+$('md').innerHTML=`<h3 style="margin:0">${title}</h3>`+fields.map(([k,l,t,o])=>`<label>${l}</label>`+(t=='sel'?`<select id="f_${k}">${o.map(x=>{const v=Array.isArray(x)?x[0]:x,n=Array.isArray(x)?x[1]:x;return`<option value="${esc(v)}" ${vals[k]==v?'selected':''}>${esc(n)}</option>`}).join('')}</select>`:`<input id="f_${k}" type="${t}" value="${esc(vals[k])}">`)).join('')+'<div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end"><button class="btn g" onclick="closeM()">Batal</button><button class="btn" id="ok">Simpan</button></div>';
+$('mo').classList.add('on');const getO=()=>{const o={};fields.forEach(([k,,t])=>{let v=$('f_'+k).value;o[k]=t=='number'?(v===''?NaN:+v):v});return o};
+$('md').oninput=null;if(prev){const pv=document.createElement('div');pv.style.cssText='margin-top:14px;padding:10px 12px;border-radius:10px;background:var(--pr2);font-size:13px;line-height:1.7';$('md').insertBefore(pv,$('md').lastElementChild);const up=()=>{pv.innerHTML=prev(getO())};$('md').oninput=up;up()}
+$('ok').onclick=()=>{const o=getO();if(!fields.every(([k])=>o[k]!==''&&!Number.isNaN(o[k]))){toast('Lengkapi semua kolom.');return}closeM();onOk(o);save();render()}}
+const closeM=()=>$('mo').classList.remove('on');
+$('mo').onclick=e=>{if(e.target.id=='mo')closeM()};
+const EF=[['nik','NIK','text'],['nama','Nama lengkap','text'],['jab','Jabatan','text'],['dept','Departemen','sel',DEPT],['join','Tanggal bergabung','date'],['status','Status','sel',['Tetap','Kontrak','Probation']],['ptkp','Status PTKP','sel',['TK/0','K/0','K/1','K/2','K/3']],['gaji','Gaji pokok (Rp)','number'],['tunj','Tunjangan tetap (Rp)','number'],['sisa','Sisa cuti (hari)','number']];
+function editEmp(id){const e=S.emp.find(x=>x.id==id)||{nik:'X-'+String(S.emp.length+1).padStart(3,'0'),nama:'',jab:'',dept:DEPT[0],join:today(),status:'Kontrak',ptkp:'TK/0',gaji:0,tunj:0,sisa:12};
+modal(id?'Ubah Karyawan':'Tambah Karyawan',EF,e,o=>{if(id)Object.assign(e,o);else S.emp.push({...o,id:S.nid++})},o=>pv({id:id||-1,gaji:+o.gaji||0,tunj:+o.tunj||0,ptkp:o.ptkp}))}
+function delEmp(id){ask('Hapus karyawan ini?',()=>{S.emp=S.emp.filter(e=>e.id!=id);save();render()})}
+function csv(){const r=[EF.map(f=>f[1])].concat(S.emp.map(e=>EF.map(f=>e[f[0]])));const b=new Blob([r.map(x=>x.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='karyawan.csv';a.click()}
+const R={
+dash(){const n=S.emp.length,pay=S.emp.reduce((a,e)=>a+calc(e,today().slice(0,7)).cash,0),pend=S.leave.filter(l=>l.st=='Menunggu').length,t=S.att[today()]||{},hadir=Object.values(t).filter(x=>x=='Hadir').length,max=Math.max(1,...DEPT.map(d=>S.emp.filter(e=>e.dept==d).length));
+return`${hero()}<h1>Dasbor</h1><p class="sub">Ringkasan SDM per ${new Date().toLocaleDateString('id-ID',{dateStyle:'long'})}</p>
+<div class="grid"><div class="card st"><b>${n}</b><span>Total karyawan</span></div><div class="card st"><b>${S.emp.filter(e=>e.status=='Tetap').length}</b><span>Karyawan tetap</span></div><div class="card st"><b>${hadir}/${n}</b><span>Hadir hari ini</span></div><div class="card st"><b>${pend}</b><span>Cuti menunggu persetujuan</span></div><div class="card st"><b>${fmt(pay)}</b><span>Bruto bulan ini (sesuai penggajian)</span></div><div class="card st"><b>${S.cand.length}</b><span>Kandidat aktif</span></div></div>
+<div class="card"><b>Karyawan per departemen</b>${DEPT.map(d=>{const c=S.emp.filter(e=>e.dept==d).length;return`<div class="bar"><span>${d}</span><i style="width:${c/max*50}%"></i><span>${c}</span></div>`}).join('')}</div>`},
+emp(){const l=S.emp.filter(e=>(e.nama+e.nik+e.jab+e.dept).toLowerCase().includes(q.toLowerCase()));
+return`<h1>Data Karyawan</h1><p class="sub">Tambah, ubah, atau hapus data karyawan.</p><div class="tools"><input id="sq" placeholder="Cari nama / NIK / jabatan…" value="${esc(q)}" oninput="q=this.value;render();const s=$('sq');s.focus();s.setSelectionRange(q.length,q.length)"><button class="btn" onclick="editEmp()">+ Karyawan</button><button class="btn g" onclick="csv()">Ekspor CSV</button></div>
+<div class="tw"><table><tr><th>NIK</th><th>Nama</th><th>Jabatan</th><th>Departemen</th><th>Gaji pokok</th><th>Tunj. tetap</th><th>Status</th><th>Gabung</th><th></th></tr>${l.map(e=>`<tr><td>${esc(e.nik)}</td><td><b>${esc(e.nama)}</b></td><td>${esc(e.jab)}</td><td>${esc(e.dept)}</td><td>${fmt(e.gaji)}</td><td>${fmt(e.tunj)}</td><td><span class="tag ${e.status=='Tetap'?'ok':e.status=='Kontrak'?'':'wa'}">${e.status}</span></td><td>${e.join}</td><td><button class="btn g s" onclick="editEmp(${e.id})">Ubah</button> <button class="btn r s" onclick="delEmp(${e.id})">Hapus</button></td></tr>`).join('')||'<tr><td colspan=9>Tidak ada data</td></tr>'}</table></div>`},
+att(){const t=S.att[attDate]||{},st=['Hadir','Izin','Sakit','Cuti','Alpa'];
+return`<h1>Absensi</h1><p class="sub">Catat kehadiran harian karyawan.</p><div class="tools"><input type="date" value="${attDate}" onchange="attDate=this.value;render()"><button class="btn g" onclick="allH()">Tandai semua Hadir</button></div>
+<div class="tw"><table><tr><th>Nama</th><th>Departemen</th><th>Status</th></tr>${S.emp.map(e=>`<tr><td><b>${esc(e.nama)}</b></td><td>${esc(e.dept)}</td><td><select onchange="setA(${e.id},this.value)"><option value="">—</option>${st.map(s=>`<option ${t[e.id]==s?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')}</table></div>
+<p class="note">Rekap bulan ini: ${st.map(s=>s+' '+Object.entries(S.att).filter(([d])=>d.slice(0,7)==attDate.slice(0,7)).reduce((a,[,v])=>a+Object.values(v).filter(x=>x==s).length,0)).join(' · ')}</p>`},
+leave(){return`<h1>Manajemen Cuti</h1><p class="sub">Pengajuan dan persetujuan cuti; kuota berkurang otomatis saat cuti tahunan disetujui.</p><div class="tools"><button class="btn" onclick="addL()">+ Ajukan cuti</button></div>
+<div class="tw"><table><tr><th>Karyawan</th><th>Jenis</th><th>Mulai</th><th>Hari</th><th>Keterangan</th><th>Status</th><th></th></tr>${S.leave.map(l=>`<tr><td><b>${esc(E(l.emp).nama)}</b><br><small style="color:var(--mu)">Sisa: ${E(l.emp).sisa??'-'} hari</small></td><td>${l.jenis}</td><td>${l.mulai}</td><td>${l.hari}</td><td>${esc(l.ket)}</td><td><span class="tag ${l.st=='Disetujui'?'ok':l.st=='Ditolak'?'er':'wa'}">${l.st}</span></td><td>${l.st=='Menunggu'?`<button class="btn s" onclick="decL(${l.id},1)">Setujui</button> <button class="btn r s" onclick="decL(${l.id},0)">Tolak</button>`:`<button class="btn r s" onclick="delL(${l.id})">Hapus</button>`}</td></tr>`).join('')||'<tr><td colspan=7>Belum ada pengajuan</td></tr>'}</table></div>`},
+rec(){return`<h1>Rekrutmen</h1><p class="sub">Pantau kandidat di setiap tahap seleksi.</p><div class="tools"><button class="btn" onclick="addC()">+ Kandidat</button></div>
+<div class="kan">${TH.map(t=>`<div><h4>${t} (${S.cand.filter(c=>c.tahap==t).length})</h4>${S.cand.filter(c=>c.tahap==t).map(c=>`<div class="card"><b>${esc(c.nama)}</b><br><small style="color:var(--mu)">${esc(c.posisi)}</small><div style="margin-top:8px;display:flex;gap:4px"><select style="font-size:12px;padding:3px" onchange="movC(${c.id},this.value)">${TH.map(x=>`<option ${x==t?'selected':''}>${x}</option>`).join('')}</select><button class="btn r s" onclick="delC(${c.id})">✕</button></div></div>`).join('')}</div>`).join('')}</div>`}};
+const TH=['Screening','Interview HR','Interview User','Penawaran','Diterima'];
+const defJobs=()=>[
+{id:1,posisi:'Staf Akuntansi',must:'akuntansi, laporan keuangan, excel, pajak|perpajakan',nice:'accurate|zahir, pph 21, rekonsiliasi',exp:2,edu:3,pass:70},
+{id:2,posisi:'Sales Executive',must:'penjualan|sales, negosiasi, target, crm',nice:'b2b, presentasi, kanvasing',exp:1,edu:3,pass:70},
+{id:3,posisi:'IT Support',must:'troubleshooting, jaringan|network, windows, hardware',nice:'linux, active directory, helpdesk, cctv',exp:1,edu:2,pass:70},
+{id:4,posisi:'HR Staff',must:'rekrutmen|recruitment, administrasi, payroll|penggajian, bpjs',nice:'psikotes, ats, onboarding, hris',exp:1,edu:3,pass:70}];
+const defCfg=()=>({basis:1,kes:1,kesP:4,kesCap:12000000,jht:2,jhtP:3.7,jp:1,jpP:2,jpCap:10547400,jkk:0.24,jkm:0.3,bj:5,bjMax:500000,hk:22,potAlpa:1,lemburX:1.5,pTK0:54e6,pK0:58.5e6,pK1:63e6,pK2:67.5e6,pK3:72e6,r1:5,r2:15,r3:25,r4:30,r5:35});
+function init(){S.cfg=Object.assign(defCfg(),S.cfg||{});S.pay=S.pay||{};S.co=Object.assign({nama:'PT X (DUMMY)',alamat:'Alamat perusahaan (ubah di menu Pengaturan)',otp:1},S.co||{});S.job=S.job||defJobs();S.scr=S.scr||[]}
+init();
+const LIM=[60e6,190e6,250e6,4500e6,1e15];
+function tax(p){let t=0,r=p;LIM.forEach((l,i)=>{const x=Math.min(r,l);t+=x*S.cfg['r'+(i+1)]/100;r-=x});return t}
+function alpaN(id,m){return Object.entries(S.att).filter(([d])=>d.slice(0,7)==m).reduce((a,[,v])=>a+(v[id]=='Alpa'?1:0),0)}
+function calc(e,m,ov){const c=S.cfg,v=Object.assign({tt:0,jam:0,bonus:0,thr:0,potLain:0,pphM:-1},ov||(S.pay[m]||{})[e.id]);
+const g=+e.gaji||0,tj=+e.tunj||0,ub=c.basis?g+tj:g,uK=Math.min(ub,c.kesCap),uP=Math.min(ub,c.jpCap),
+lem=v.jam*(g+tj)/173*c.lemburX,alpa=c.potAlpa?g/c.hk*alpaN(e.id,m):0,
+kesE=uK*c.kesP/100,jkk=ub*c.jkk/100,jkm=ub*c.jkm/100,jhtE=ub*c.jhtP/100,jpE=uP*c.jpP/100,
+kes=uK*c.kes/100,jht=ub*c.jht/100,jp=uP*c.jp/100,
+irr=v.bonus+v.thr,reg=g+tj+v.tt+lem-alpa+kesE+jkk+jkm,bj=Math.min(Math.max(reg,0)*c.bj/100,c.bjMax),
+ptkp=c['p'+String(e.ptkp).replace('/','')]||c.pTK0,pkp=Math.max(0,(reg-bj-jht-jp)*12-ptkp),pA=tax(pkp),pB=tax(pkp+irr),
+pph=v.pphM>=0?v.pphM:pA/12+(pB-pA),cash=g+tj+v.tt+lem+irr,pot=kes+jht+jp+alpa+v.potLain;
+return{v,ub,uK,uP,lem,cash,kes,jht,jp,alpa,pph,pot,reg,bj,ptkp,pkp,net:cash-pot-pph,vr:v.tt+lem+irr,biaya:cash-alpa+kesE+jkk+jkm+jhtE+jpE,kesE,jkk,jkm,jhtE,jpE}}
+R.pay=()=>{const rows=S.emp.map(e=>({e,s:calc(e,pm)})),sum=k=>rows.reduce((a,r)=>a+r.s[k],0);
+return`<h1>Penggajian</h1><p class="sub">Slip gaji otomatis dari data karyawan, parameter, dan komponen variabel bulanan. Semua bisa diubah.</p>
+<div class="tools"><input type="month" value="${pm}" onchange="pm=this.value;render()"><button class="btn g" onclick="editCfg()">⚙ Parameter &amp; tarif</button></div>
+<p class="note" style="margin:0 0 12px">Tarif aktif (otomatis dipakai di semua perhitungan): BPJS Kesehatan ${S.cfg.kes}% (maks. upah ${fmt(S.cfg.kesCap)}) · JHT ${S.cfg.jht}% · JP ${S.cfg.jp}% (maks. upah ${fmt(S.cfg.jpCap)}) · biaya jabatan ${S.cfg.bj}%. Ubah di ⚙ Parameter &amp; tarif.</p><div class="grid"><div class="card st"><b>${fmt(sum('cash'))}</b><span>Total penghasilan bruto</span></div><div class="card st"><b>${fmt(sum('pph'))}</b><span>Total PPh 21</span></div><div class="card st"><b>${fmt(sum('net'))}</b><span>Total take-home pay</span></div><div class="card st"><b>${fmt(sum('biaya'))}</b><span>Total biaya perusahaan</span></div></div>
+<div class="tw"><table><tr><th>Nama</th><th>Gaji + tunj. tetap</th><th>Variabel</th><th>Bruto</th><th>BPJS Kes ${S.cfg.kes}%</th><th>JHT ${S.cfg.jht}%</th><th>JP ${S.cfg.jp}%</th><th>Alpa/lain</th><th>PPh 21</th><th>Take-home</th><th></th></tr>${rows.map(({e,s})=>`<tr><td><b>${esc(e.nama)}</b><br><small style="color:var(--mu)">${e.ptkp} · dasar iuran ${fmt(s.ub)}${s.alpa?' · alpa '+alpaN(e.id,pm)+' hari':''}</small></td><td>${fmt(e.gaji+e.tunj)}</td><td>${fmt(s.vr)}</td><td>${fmt(s.cash)}</td><td>− ${fmt(s.kes)}</td><td>− ${fmt(s.jht)}</td><td>− ${fmt(s.jp)}</td><td>${s.alpa+s.v.potLain?'− '+fmt(s.alpa+s.v.potLain):'-'}</td><td>${fmt(s.pph)}${s.v.pphM>=0?' <span class="tag wa">manual</span>':''}</td><td><b>${fmt(s.net)}</b></td><td><button class="btn g s" onclick="editPay(${e.id})">Variabel</button> <button class="btn g s" onclick="editEmp(${e.id})">Gaji</button> <button class="btn s" onclick="slip(${e.id})">Slip</button></td></tr>`).join('')}</table></div>
+<p class="note">Variabel = tunjangan tidak tetap, lembur, bonus, THR. Potongan = BPJS Kesehatan, JHT, JP, potongan alpa (dari menu Absensi), dan potongan lain. PPh 21 dihitung dengan tarif Pasal 17: penghasilan rutin disetahunkan, bonus/THR dihitung sebagai selisih pajak. Premi JKK, JKM, dan BPJS Kesehatan yang dibayar perusahaan ikut menjadi penghasilan kena pajak. Ini estimasi bulanan, belum metode TER dan penyesuaian akhir tahun (Desember). Verifikasi tarif, batas iuran BPJS, dan PTKP di ⚙ Parameter terhadap ketentuan terbaru.</p>`};
+function pv(e,ov){const s=calc(e,pm,ov),c=S.cfg,f=fmt,l=(a,b)=>`${a}: <b style="float:right">${b}</b><br>`;
+return `<b>Simulasi otomatis · ${pm}</b><br>`+l('Penghasilan bruto',f(s.cash))+l('Dasar upah iuran BPJS',f(s.ub))+l(`BPJS Kesehatan (${c.kes}%)`,'− '+f(s.kes))+l(`JHT (${c.jht}%)`,'− '+f(s.jht))+l(`JP (${c.jp}%)`,'− '+f(s.jp))+(s.alpa+s.v.potLain?l('Alpa / potongan lain','− '+f(s.alpa+s.v.potLain)):'')+l(`PPh 21 (PKP setahun ${f(s.pkp)})`,'− '+f(s.pph))+`<hr style="border:0;border-top:1px solid var(--bd);margin:4px 0"><span style="color:var(--pr)">`+l('Take-home pay',f(s.net))+'</span>'}
+function editPay(id){const e=E(id),o=((S.pay[pm]||{})[id])||{tt:0,jam:0,bonus:0,thr:0,potLain:0,pphM:-1};
+modal('Komponen variabel · '+e.nama+' · '+pm,[['tt','Tunjangan tidak tetap: makan/transport (Rp)','number'],['jam','Jam lembur','number'],['bonus','Bonus / insentif (Rp)','number'],['thr','THR (Rp)','number'],['potLain','Potongan lain: kasbon, dll (Rp)','number'],['pphM','PPh 21 manual (Rp); isi -1 untuk otomatis','number']],o,n=>{(S.pay[pm]=S.pay[pm]||{})[id]=n},o=>{const k={};for(const x in o)k[x]=Number.isNaN(o[x])?(x=='pphM'?-1:0):o[x];return pv(e,k)})}
+function editCfg(){modal('Parameter Penggajian',[
+['basis','Dasar upah iuran BPJS: 1 = gaji pokok + tunjangan tetap, 0 = gaji pokok saja','number'],['kes','BPJS Kesehatan karyawan (%)','number'],['kesP','BPJS Kesehatan perusahaan (%)','number'],['kesCap','Batas upah BPJS Kesehatan (Rp)','number'],
+['jht','JHT karyawan (%)','number'],['jhtP','JHT perusahaan (%)','number'],['jp','JP karyawan (%)','number'],['jpP','JP perusahaan (%)','number'],['jpCap','Batas upah JP (Rp)','number'],
+['jkk','JKK perusahaan (%)','number'],['jkm','JKM perusahaan (%)','number'],['bj','Biaya jabatan (%)','number'],['bjMax','Maks. biaya jabatan per bulan (Rp)','number'],
+['hk','Hari kerja per bulan','number'],['potAlpa','Potong gaji bila alpa (1 = ya, 0 = tidak)','number'],['lemburX','Pengali upah lembur per jam','number'],
+['pTK0','PTKP TK/0 (Rp/tahun)','number'],['pK0','PTKP K/0','number'],['pK1','PTKP K/1','number'],['pK2','PTKP K/2','number'],['pK3','PTKP K/3','number'],
+['r1','Tarif PPh lapisan 1: s.d. Rp60 jt (%)','number'],['r2','Lapisan 2: s.d. Rp250 jt (%)','number'],['r3','Lapisan 3: s.d. Rp500 jt (%)','number'],['r4','Lapisan 4: s.d. Rp5 miliar (%)','number'],['r5','Lapisan 5: di atas Rp5 miliar (%)','number']],S.cfg,o=>Object.assign(S.cfg,o))}
+function slip(id){const e=E(id),s=calc(e,pm),v=s.v,r=(a,b,m)=>b?`<tr><td>${a}</td><td style="text-align:right">${m?'− ':''}${fmt(b)}</td></tr>`:'';
+$('md').innerHTML=`<h3 style="margin:0">Slip Gaji ${pm}</h3><div class="note" style="margin:0">${esc(S.co.nama)}</div><p class="sub" style="margin:2px 0 8px">${esc(e.nama)} · ${esc(e.jab)} · ${e.ptkp}</p><div class="tw"><table>${r('Gaji pokok',e.gaji)}${r('Tunjangan tetap',e.tunj)}${r('Tunjangan tidak tetap',v.tt)}${r('Lembur ('+v.jam+' jam)',s.lem)}${r('Bonus',v.bonus)}${r('THR',v.thr)}<tr><th>Penghasilan bruto</th><th style="text-align:right">${fmt(s.cash)}</th></tr>${r('BPJS Kesehatan',s.kes,1)}${r('JHT',s.jht,1)}${r('JP',s.jp,1)}${r('Potongan alpa',s.alpa,1)}${r('Potongan lain',v.potLain,1)}${r('PPh 21'+(v.pphM>=0?' (manual)':''),s.pph,1)}<tr><th>Take-home pay</th><th style="text-align:right">${fmt(s.net)}</th></tr></table></div><p class="note"><b>Dasar perhitungan</b><br>Dasar upah iuran: ${fmt(s.ub)} (BPJS Kes: ${fmt(s.uK)}, JP: ${fmt(s.uP)})<br>Penghasilan rutin kena pajak (termasuk premi perusahaan, setelah potongan alpa): ${fmt(s.reg)}<br>Biaya jabatan: ${fmt(s.bj)} · PTKP/tahun: ${fmt(s.ptkp)} · PKP/tahun: ${fmt(s.pkp)}<br>Biaya perusahaan (bruto + premi BPJS perusahaan): ${fmt(s.biaya)}</p><div style="margin-top:10px;text-align:right"><button class="btn g" onclick="closeM()">Tutup</button></div>`;$('mo').classList.add('on')}
+let sj=0,cvN='',cvT='',last=null;
+const EDU=[[1,'SMA/SMK'],[2,'D3'],[3,'S1'],[4,'S2'],[5,'S3']],eduL=n=>(EDU.find(x=>x[0]==n)||[0,'Tidak terdeteksi'])[1];
+const kws=x=>String(x).split(',').map(k=>k.trim()).filter(k=>k&&k!='-');
+const hit=(t,k)=>k.split('|').some(a=>{a=a.trim().toLowerCase();return a&&new RegExp('(^|[^a-z0-9])'+a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z0-9]|$)').test(t)});
+function expYears(t){let m=0,x,re=/(\d{1,2})\s*\+?\s*(?:tahun|thn|years?|yrs?)/g;while(x=re.exec(t))m=Math.max(m,+x[1]);
+let sum=0,r2=/((?:19|20)\d{2})\s*(?:-|–|—|s\/d|sd|sampai|hingga|to)\s*((?:19|20)\d{2}|sekarang|present|saat ini|now)/g,y=new Date().getFullYear();
+t.split('\n').filter(l=>!/universitas|institut|politeknik|\bs[123]\b|\bd3\b|\bsm[ak]\b|ipk|sekolah|kuliah|pendidikan/.test(l)).forEach(l=>{r2.lastIndex=0;while(x=r2.exec(l)){const e=/\d/.test(x[2])?+x[2]:y;if(e>=+x[1])sum+=e-x[1]}});return Math.min(40,Math.max(m,sum))}
+function eduLvl(t){const T=[[5,/\b(s3|doktor|doctor|ph\.?d)\b/],[4,/\b(s2|magister|master)\b|\bm\.\s?(si|m|kom|t|psi|ak)\b/],[3,/\b(s1|sarjana|bachelor)\b|\bs\.\s?(psi|e|kom|t|h|ab|sos|si|pd|ak)\b/],[2,/\b(d3|d-3|diploma|a\.?md)\b/],[1,/\b(sma|smk|slta|high school)\b/]];
+for(const [l,re] of T)if(re.test(t))return l;return 0}
+function analyze(j,text,nama){const t=text.toLowerCase(),must=kws(j.must),nice=kws(j.nice),mm=must.filter(k=>hit(t,k)),nm=nice.filter(k=>hit(t,k)),exp=expYears(t),edu=eduLvl(t),p=j.pass||70,
+sM=must.length?mm.length/must.length:1,sN=nice.length?nm.length/nice.length:1,sE=j.exp?Math.min(1,exp/j.exp):1,sD=j.edu?(edu>=j.edu?1:edu==j.edu-1?.5:0):1,score=Math.round(sM*50+sN*15+sE*20+sD*15),
+chk=[['Email',/[\w.+-]+@[\w-]+\.[\w.]+/.test(text)],['Nomor telepon',/(\+?62|0)8\d[\d\s-]{7,}/.test(text)],['Bagian pengalaman',/pengalaman|experience|riwayat kerja/.test(t)],['Bagian pendidikan',/pendidikan|education/.test(t)],['Bagian keahlian',/keahlian|skill|kompetensi/.test(t)],['Panjang ≥150 kata',text.trim().split(/\s+/).length>=150]];
+return{id:S.nid++,nama,job:j.id,posisi:j.posisi,score,sM,sN,sE,sD,mm,must,nm,nice,exp,edu,chk,rek:score>=p?'Lolos':score>=p-20?'Pertimbangkan':'Tidak sesuai',sent:false}}
+const tg=(a,c)=>a.map(k=>`<span class="tag ${c}" style="margin:2px;display:inline-block">${esc(k)}</span>`).join('')||'-';
+const rc=r=>r=='Lolos'?'ok':r=='Pertimbangkan'?'wa':'er';
+const resHtml=r=>{const bar=(l,v)=>`<div class="bar"><span style="white-space:normal">${l}</span><i style="width:${v*45}%"></i><span>${Math.round(v*100)}%</span></div>`;
+return`<div class="card" style="margin-bottom:12px"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div style="width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--pr) ${r.score}%,var(--pr2) 0);display:grid;place-items:center"><div style="width:70px;height:70px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-weight:800;font-size:24px">${r.score}</div></div><div><h3 style="margin:0 0 4px">${esc(r.nama)}</h3><span class="tag ${rc(r.rek)}">${r.rek}</span> <span style="color:var(--mu)">untuk ${esc(r.posisi)}</span></div></div>
+<div style="margin-top:12px">${bar('Kata kunci wajib (50%)',r.sM)}${bar('Nilai tambah (15%)',r.sN)}${bar('Pengalaman (20%)',r.sE)}${bar('Pendidikan (15%)',r.sD)}</div>
+<p><b>Kata kunci cocok:</b> ${tg(r.mm.concat(r.nm),'ok')}</p><p><b>Wajib yang belum ditemukan:</b> ${tg(r.must.filter(k=>!r.mm.includes(k)),'er')}</p><p><b>Nilai tambah yang belum ada:</b> ${tg(r.nice.filter(k=>!r.nm.includes(k)),'wa')}</p>
+<p class="note">Terdeteksi: pengalaman ± ${r.exp} tahun · pendidikan ${eduL(r.edu)}</p><p style="font-size:13px"><b>Kelengkapan CV (format ATS):</b> ${r.chk.map(([l,o])=>`<span class="tag ${o?'ok':'er'}" style="margin:2px;display:inline-block">${o?'✓':'✗'} ${l}</span>`).join('')}</p></div>`};
+R.scr=()=>{if(!S.job.find(x=>x.id==sj))sj=S.job[0]?S.job[0].id:0;const j=S.job.find(x=>x.id==sj),rs=S.scr.filter(r=>r.job==sj).sort((a,b)=>b.score-a.score),ta='width:100%;font:inherit;padding:8px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--sf);color:var(--tx)';
+return`<h1>Screening CV (ATS)</h1><p class="sub">Pilih lowongan, unggah CV (PDF/Word) atau tempel teksnya, lalu klik Analisis. Pilih beberapa file sekaligus untuk dianalisis otomatis. Skor dihitung otomatis dari kecocokan kata kunci, pengalaman, dan pendidikan.</p>
+<div class="card" style="margin-bottom:12px"><div class="tools"><select onchange="sj=+this.value;last=null;render()">${S.job.map(x=>`<option value="${x.id}" ${x.id==sj?'selected':''}>${esc(x.posisi)}</option>`).join('')}</select><button class="btn g s" onclick="editJob(sj)">Ubah kriteria</button><button class="btn g s" onclick="editJob()">+ Lowongan</button><button class="btn r s" onclick="delJob()">Hapus</button></div>
+${j?`<div style="font-size:13px"><b>Wajib:</b> ${tg(kws(j.must),'')}<br><b>Nilai tambah:</b> ${tg(kws(j.nice),'wa')}<br><b>Min. pengalaman:</b> ${j.exp} tahun · <b>Min. pendidikan:</b> ${eduL(j.edu)} · <b>Skor lolos:</b> ${j.pass||70}</div>`:'Belum ada lowongan. Klik + Lowongan.'}</div>
+<div class="card" style="margin-bottom:12px"><label style="font-size:12px;color:var(--mu)">Nama kandidat</label><input id="cvn" value="${esc(cvN)}" oninput="cvN=this.value" style="${ta};margin:3px 0 10px"><label style="font-size:12px;color:var(--mu)">Isi CV: unggah file PDF / Word (.docx) / .txt, atau tempel teksnya di sini</label><textarea id="cvt" rows="8" oninput="cvT=this.value" style="${ta};margin-top:3px">${esc(cvT)}</textarea>
+<div class="tools" style="margin:10px 0 0"><button class="btn" onclick="runScr()">Analisis CV</button><button class="btn g" onclick="sample()">Isi contoh CV</button><input type="file" accept=".pdf,.docx,.txt,.md" multiple onchange="loadF(this)"><span id="fs" class="note" style="margin:0"></span></div></div>
+${last?resHtml(last):''}<h3 style="margin:16px 0 8px">Peringkat kandidat${j?' — '+esc(j.posisi):''}</h3>
+<div class="tw"><table><tr><th>#</th><th>Nama</th><th>Skor</th><th>Rekomendasi</th><th>Pengalaman</th><th></th></tr>${rs.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.nama)}</b></td><td><b>${r.score}</b></td><td><span class="tag ${rc(r.rek)}">${r.rek}</span></td><td>${r.exp} th</td><td><button class="btn g s" onclick="last=S.scr.find(x=>x.id==${r.id});render()">Detail</button> ${r.sent?'<span class="tag ok">Di Rekrutmen</span>':`<button class="btn s" onclick="sendC(${r.id})">Kirim ke Rekrutmen</button>`} <button class="btn r s" onclick="delS(${r.id})">Hapus</button></td></tr>`).join('')||'<tr><td colspan=6>Belum ada kandidat yang discreening</td></tr>'}</table></div>
+<p class="note">Skor = kata kunci wajib 50% + nilai tambah 15% + pengalaman 20% + pendidikan 15%. Skor ≥ batas lolos: Lolos; 20 poin di bawahnya: Pertimbangkan. Hasil ini alat bantu penyaringan awal; keputusan akhir tetap oleh rekruter.</p>`};
+function runScr(){const j=S.job.find(x=>x.id==sj);if(!j){toast('Buat lowongan dulu.');return}if(!cvN.trim()||cvT.trim().length<30){toast('Isi nama kandidat dan teks CV.');return}last=analyze(j,cvT,cvN.trim());S.scr.push(last);save();cvN='';cvT='';render();window.scrollTo(0,0)}
+function sample(){cvN='Rina Anggraini';cvT=`Rina Anggraini | rina.anggraini@email.com | 0812-3456-7890 | Jakarta Barat\nPROFIL\nStaf akuntansi dengan pengalaman 6 tahun di perusahaan distribusi, teliti dan terbiasa bekerja dengan target closing bulanan.\nPENGALAMAN KERJA\nStaf Akuntansi, PT Maju Bersama (2022 - sekarang)\n- Menyusun laporan keuangan bulanan dan melakukan rekonsiliasi bank.\n- Mengelola administrasi perpajakan, menghitung PPh 21 dan PPN.\n- Input jurnal menggunakan Accurate dan olah data dengan Excel (pivot, vlookup).\nAdmin Keuangan, CV Sinar Jaya (2020 - 2022)\n- Membuat invoice, mencatat kas dan hutang piutang.\nPENDIDIKAN\nS1 Akuntansi, Universitas Gunadarma, IPK 3,70 (2016 - 2020)\nKEAHLIAN\nMicrosoft Excel, Accurate, Zahir, perpajakan, laporan keuangan, komunikasi, kerja tim. Kemampuan analisis data, ketelitian tinggi, dan manajemen waktu yang baik untuk mendukung proses closing, audit internal, serta pelaporan kepada manajemen secara tepat waktu dan akurat setiap bulan.`;render()}
+async function readFile(f){const n=f.name.toLowerCase();
+if(n.endsWith('.pdf')){if(!window.pdfjsLib)throw new Error('pustaka PDF gagal dimuat (cek koneksi internet)');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+const d=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let o='';for(let i=1;i<=d.numPages;i++){const c=await(await d.getPage(i)).getTextContent();let y=null;c.items.forEach(it=>{const yy=it.transform[5];o+=(y!==null&&Math.abs(yy-y)>2?'\n':' ')+it.str;y=yy});o+='\n'}return o}
+if(n.endsWith('.docx')){if(!window.mammoth)throw new Error('pustaka Word gagal dimuat (cek koneksi internet)');return (await mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()})).value}
+if(n.endsWith('.doc'))throw new Error('format .doc lama tidak didukung; simpan ulang sebagai .docx atau PDF');
+return await f.text()}
+async function loadF(i){const fl=[...i.files];if(!fl.length)return;const j=S.job.find(x=>x.id==sj);if(fl.length>1&&!j){toast('Buat lowongan dulu.');return}
+const st=$('fs');let bad=[],ok=0;
+for(let k=0;k<fl.length;k++){const f=fl[k];if(st)st.textContent='Membaca '+(k+1)+'/'+fl.length+': '+f.name+' …';
+try{const t=await readFile(f);if(t.trim().length<30)throw new Error('teks tidak terbaca (mungkin PDF hasil scan/gambar); gunakan PDF berisi teks atau salin-tempel');
+const nm=f.name.replace(/\.\w+$/,'').replace(/[_-]+/g,' ').replace(/\bcv\b/ig,'').trim()||f.name;
+if(fl.length==1){cvT=t;cvN=nm}else{last=analyze(j,t,nm);S.scr.push(last);ok++}}catch(e){bad.push(f.name+': '+(e.message||e))}}
+save();render();if(ok)window.scrollTo(0,0);if(bad.length)toast('Sebagian file tidak bisa dibaca:\n'+bad.join('\n'))}
+function editJob(id){const j=S.job.find(x=>x.id==id)||{posisi:'',must:'',nice:'-',exp:1,edu:3,pass:70};
+modal(id?'Ubah Kriteria Lowongan':'Tambah Lowongan',[['posisi','Posisi','text'],['must','Kata kunci WAJIB (pisahkan koma; sinonim dengan |, contoh: sales|penjualan)','text'],['nice','Kata kunci nilai tambah (isi - bila tidak ada)','text'],['exp','Minimal pengalaman (tahun)','number'],['edu','Minimal pendidikan','sel',EDU],['pass','Skor lolos (0-100)','number']],j,o=>{o.edu=+o.edu;if(id)Object.assign(j,o);else{o.id=S.nid++;S.job.push(o);sj=o.id}})}
+function delJob(){if(!S.job.length)return;ask('Hapus lowongan ini beserta hasil screening-nya?',()=>{S.scr=S.scr.filter(r=>r.job!=sj);S.job=S.job.filter(x=>x.id!=sj);last=null;save();render()})}
+function sendC(id){const r=S.scr.find(x=>x.id==id);S.cand.push({id:S.nid++,nama:r.nama,posisi:r.posisi,tahap:r.rek=='Lolos'?'Interview HR':'Screening'});r.sent=true;save();render()}
+function delS(id){S.scr=S.scr.filter(r=>r.id!=id);if(last&&last.id==id)last=null;save();render()}
+const UK='nusantara-hris-users';let U=[];try{U=JSON.parse(localStorage.getItem(UK))||[]}catch(e){}
+const saveU=()=>{try{localStorage.setItem(UK,JSON.stringify(U))}catch(e){}};
+let me=null,authed=false,otp=null,pend=null,fails=0,lockUntil=0;
+try{const u=U.find(x=>x.id==sessionStorage.getItem('hris-sess'));if(u){me=u;authed=true}}catch(e){}
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),pwOk=p=>/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(p);
+const newSalt=()=>b64(crypto.getRandomValues(new Uint8Array(16)));
+async function hashPw(pw,salt){const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);return b64(await crypto.subtle.deriveBits({name:'PBKDF2',salt:Uint8Array.from(atob(salt),c=>c.charCodeAt(0)),iterations:150000,hash:'SHA-256'},k,256))}
+function showAuth(mode,msg){const a=$('auth');a.style.display='flex';mode=mode||(U.length?'login':'setup');
+const inp=(id,l,t,x)=>`<label>${l}</label><input id="${id}" type="${t||'text'}" ${x||''}>`,ent=f=>`onkeydown="if(event.key=='Enter')${f}()"`,
+card=(t,b)=>`<div class="o o1"></div><div class="o o2"></div><div class="wm">${G(560)}</div><div class="cv" style="grid-template-columns:1fr;max-width:430px"><div class="glass af" style="padding:26px"><div style="text-align:center">${G(60)}<h2 style="margin:8px 0 2px">${t}</h2><div class="eb2" style="margin-bottom:14px">Nusantara HRIS · ${esc(S.co.nama)}</div></div>${msg?`<div class="amsg">${esc(msg)}</div>`:''}${b}</div></div>`;
+if(mode=='setup')a.innerHTML=card('Buat Akun Admin HR',`<div class="amsg">Belum ada akun. Akun pertama menjadi Admin yang bisa mendaftarkan pengguna HR lain.</div>${inp('an','Nama lengkap')}${inp('ae','Email','email')}${inp('ap','Kata sandi (min. 8 karakter, huruf + angka)','password')}${inp('ap2','Ulangi kata sandi','password',ent('doSetup'))}<button class="btn cta" style="width:100%" onclick="doSetup()">Buat akun</button>`);
+else if(mode=='otp')a.innerHTML=card('Verifikasi Email',`<div class="mail">📧 <b>Simulasi email masuk</b><br>Kepada: ${esc(pend.email)}<br>Kode verifikasi: <b style="font-size:22px;letter-spacing:5px">${otp.c}</b><br><small style="color:#666">Berlaku 5 menit. Pada versi produksi kode ini dikirim ke email sungguhan.</small></div>${inp('ac','Masukkan kode 6 digit','text','inputmode="numeric" maxlength="6" '+ent('doOtp'))}<button class="btn cta" style="width:100%" onclick="doOtp()">Verifikasi &amp; masuk</button><div class="tools" style="justify-content:center;margin:10px 0 0"><button class="btn cta g2 s" onclick="sendOtp();showAuth('otp','Kode baru sudah dibuat.')">Kirim ulang</button><button class="btn cta g2 s" onclick="showAuth('login')">Batal</button></div>`);
+else a.innerHTML=card('Masuk HRIS',`${inp('ae','Email','email')}${inp('ap','Kata sandi HRIS','password',ent('doLogin'))}<button class="btn cta" style="width:100%" onclick="doLogin()">Masuk</button><p style="font-size:12px;opacity:.85;margin:12px 0 0;text-align:center">Lupa kata sandi? <a href="#" style="color:#ffd666" onclick="showAuth('login','Hubungi Admin HR untuk mereset kata sandi Anda (menu Pengaturan, bagian Pengguna HR).');return false">Bantuan</a></p>`);
+try{setTimeout(()=>{const f=a.querySelector('input');f&&f.focus()},50)}catch(e){}}
+async function doSetup(){const v=id=>$(id).value,nm=v('an').trim(),em=v('ae').trim().toLowerCase();
+if(!nm||!/^\S+@\S+\.\S+$/.test(em))return showAuth('setup','Isi nama dan email yang valid.');
+if(!pwOk(v('ap')))return showAuth('setup','Kata sandi minimal 8 karakter dan mengandung huruf dan angka.');
+if(v('ap')!=v('ap2'))return showAuth('setup','Konfirmasi kata sandi tidak sama.');
+try{const salt=newSalt();U.push({id:Date.now(),email:em,nama:nm,role:'Admin',salt,hash:await hashPw(v('ap'),salt),must:0});saveU();showAuth('login','Akun Admin dibuat. Silakan masuk.')}catch(e){showAuth('setup','Browser tidak mendukung penyimpanan kata sandi aman (butuh HTTPS).')}}
+async function doLogin(){const now=Date.now();if(now<lockUntil)return showAuth('login','Terlalu banyak percobaan. Coba lagi dalam '+Math.ceil((lockUntil-now)/1000)+' detik.');
+const em=$('ae').value.trim().toLowerCase(),pw=$('ap').value,u=U.find(x=>x.email==em);let ok=false;
+try{ok=u?(await hashPw(pw,u.salt))==u.hash:(await hashPw(pw,newSalt()),false)}catch(e){return showAuth('login','Browser tidak mendukung verifikasi kata sandi (butuh HTTPS).')}
+if(!ok){if(++fails>=5){lockUntil=Date.now()+30000;fails=0}return showAuth('login','Email atau kata sandi salah.')}
+fails=0;if(S.co.otp){pend=u;sendOtp();showAuth('otp')}else done(u)}
+function sendOtp(){otp={c:String(100000+crypto.getRandomValues(new Uint32Array(1))[0]%900000),exp:Date.now()+3e5,n:0}}
+function doOtp(){if(!otp||!pend)return showAuth('login');if(Date.now()>otp.exp)return showAuth('otp','Kode kedaluwarsa. Klik Kirim ulang.');
+if(++otp.n>5){otp=null;return showAuth('login','Terlalu banyak kode salah. Silakan masuk ulang.')}
+if($('ac').value.trim()!=otp.c)return showAuth('otp','Kode salah. Coba lagi.');otp=null;done(pend)}
+function done(u){me=u;authed=true;try{sessionStorage.setItem('hris-sess',u.id)}catch(e){}$('auth').style.display='none';$('cover').style.display='none';render();if(u.must)chPw(true)}
+function enter(){if(authed)hideScr('cover');else showAuth()}
+function logout(){authed=false;me=null;try{sessionStorage.removeItem('hris-sess')}catch(e){}$('main').innerHTML='';$('nav').innerHTML='';showAuth('login','Anda sudah keluar.')}
+function invite(em,pw){$('md').oninput=null;$('md').innerHTML=`<h3 style="margin:0 0 6px">Akun siap digunakan</h3><p class="sub" style="margin:0 0 8px">Kirim undangan ini ke ${esc(em)}. Pengguna akan diminta mengganti kata sandi saat pertama masuk.</p><textarea rows="7" readonly onclick="this.select()" style="width:100%;font:inherit;padding:8px;border:1px solid var(--bd);border-radius:9px;background:var(--sf);color:var(--tx)">Halo, Anda didaftarkan sebagai pengguna Nusantara HRIS ${S.co.nama}.\nTautan aplikasi: (isi tautan web HRIS Anda)\nEmail: ${em}\nKata sandi sementara: ${pw}\nSilakan masuk dan segera ganti kata sandi.</textarea><div style="margin-top:12px;text-align:right"><button class="btn" onclick="closeM()">Selesai</button></div>`;$('mo').classList.add('on')}
+function addUser(v){v=v||{nama:'',email:'',role:'HR',pw:''};
+modal('Tambah Pengguna HR',[['nama','Nama lengkap','text'],['email','Email (dipakai untuk masuk)','email'],['role','Peran','sel',['HR','Admin']],['pw','Kata sandi sementara (min. 8 karakter, huruf + angka)','text']],v,async o=>{const em=o.email.trim().toLowerCase();
+if(!/^\S+@\S+\.\S+$/.test(em)){toast('Email tidak valid.');return addUser(o)}if(U.some(x=>x.email==em)){toast('Email sudah terdaftar.');return addUser(o)}
+if(!pwOk(o.pw)){toast('Kata sandi minimal 8 karakter, mengandung huruf dan angka.');return addUser(o)}
+const salt=newSalt();U.push({id:Date.now(),email:em,nama:o.nama.trim(),role:o.role,salt,hash:await hashPw(o.pw,salt),must:1});saveU();render();invite(em,o.pw)})}
+function resetPw(id){const u=U.find(x=>x.id==id);modal('Reset kata sandi · '+u.email,[['pw','Kata sandi sementara baru (min. 8 karakter, huruf + angka)','text']],{pw:''},async o=>{if(!pwOk(o.pw)){toast('Kata sandi minimal 8 karakter, mengandung huruf dan angka.');return resetPw(id)}
+u.salt=newSalt();u.hash=await hashPw(o.pw,u.salt);u.must=1;saveU();render();invite(u.email,o.pw)})}
+const admins=()=>U.filter(x=>x.role=='Admin').length;
+function editUser(id,v){const u=U.find(x=>x.id==id);v=v||{nama:u.nama,email:u.email,role:u.role};
+modal('Ubah Akun · '+u.email,[['nama','Nama lengkap','text'],['email','Email (untuk masuk)','email'],['role','Peran','sel',['HR','Admin']]],v,o=>{const em=o.email.trim().toLowerCase();
+if(!/^\S+@\S+\.\S+$/.test(em)){toast('Email tidak valid.');return editUser(id,o)}
+if(U.some(x=>x!=u&&x.email==em)){toast('Email sudah dipakai akun lain.');return editUser(id,o)}
+if(u.role=='Admin'&&o.role!='Admin'&&admins()<2){toast('Minimal harus ada satu Admin. Jadikan akun lain Admin dulu.');return editUser(id,o)}
+u.nama=o.nama.trim();u.email=em;u.role=o.role;saveU();render()})}
+function setRole(id,role){const u=U.find(x=>x.id==id);if(role!='Admin'&&u.role=='Admin'&&admins()<2)return toast('Minimal harus ada satu Admin.');
+ask('Ubah peran '+u.nama+' menjadi '+role+'?',()=>{u.role=role;saveU();render()},'Ya, ubah')}
+function transferAdmin(id){const u=U.find(x=>x.id==id);ask('Alihkan peran Admin ke '+u.nama+' ('+u.email+')? Akun Anda akan menjadi HR biasa dan tidak lagi bisa mengelola akun.',()=>{u.role='Admin';me.role='HR';saveU();go('dash')},'Ya, alihkan')}
+function delUser(id){const u=U.find(x=>x.id==id);if(u.role=='Admin'&&admins()<2)return toast('Minimal harus ada satu Admin. Jadikan akun lain Admin dulu.');
+const self=u==me;ask(self?'Hapus akun Anda sendiri? Anda akan langsung keluar.':'Hapus akun '+u.email+'?',()=>{U=U.filter(x=>x!=u);saveU();self?logout():render()})}
+function chPw(force){modal(force?'Ganti kata sandi sementara':'Ganti kata sandi',[['cur','Kata sandi saat ini','password'],['nw','Kata sandi baru (min. 8 karakter, huruf + angka)','password'],['cf','Ulangi kata sandi baru','password']],{cur:'',nw:'',cf:''},async o=>{
+if(await hashPw(o.cur,me.salt)!=me.hash){toast('Kata sandi saat ini salah.');return chPw(force)}
+if(!pwOk(o.nw)||o.nw!=o.cf){toast('Kata sandi baru minimal 8 karakter (huruf + angka) dan harus sama dengan konfirmasi.');return chPw(force)}
+me.salt=newSalt();me.hash=await hashPw(o.nw,me.salt);me.must=0;saveU();toast('Kata sandi berhasil diperbarui.')})}
+function editCo(){modal('Profil Perusahaan',[['nama','Nama perusahaan','text'],['alamat','Alamat','text']],S.co,o=>{Object.assign(S.co,o);initScreens()})}
+R.set=()=>{const adm=me.role=='Admin';return`<h1>Pengaturan</h1><p class="sub">Profil perusahaan, keamanan, dan akun pengguna HR.</p>
+<div class="card" style="margin-bottom:12px"><b>Profil perusahaan</b><p style="margin:8px 0">Nama: <b>${esc(S.co.nama)}</b><br>Alamat: ${esc(S.co.alamat)}</p>${adm?'<button class="btn g s" onclick="editCo()">Ubah nama perusahaan</button>':'<span class="note">Hanya Admin yang dapat mengubah.</span>'}</div>
+<div class="card" style="margin-bottom:12px"><b>Keamanan</b><p style="margin:8px 0">Masuk sebagai <b>${esc(me.nama)}</b> (${esc(me.email)}) · ${me.role}</p><div class="tools"><button class="btn g s" onclick="chPw()">Ganti kata sandi</button>${adm?`<label style="display:flex;gap:6px;align-items:center"><input type="checkbox" ${S.co.otp?'checked':''} onchange="S.co.otp=this.checked?1:0;save()">Wajib verifikasi kode email saat masuk (2 langkah)</label>`:''}</div></div>
+${adm?`<div class="tools"><b>Pengguna HR</b><button class="btn s" onclick="addUser()">+ Tambah pengguna</button></div><div class="tw"><table><tr><th>Nama</th><th>Email</th><th>Peran</th><th>Status</th><th></th></tr>${U.map(u=>`<tr><td><b>${esc(u.nama)}</b>${u==me?' <span class="tag ok">Anda</span>':''}</td><td>${esc(u.email)}</td><td><span class="tag">${u.role}</span></td><td>${u.must?'<span class="tag wa">Belum ganti sandi</span>':'<span class="tag ok">Aktif</span>'}</td><td><button class="btn g s" onclick="editUser(${u.id})">Ubah</button> <button class="btn g s" onclick="resetPw(${u.id})">Reset sandi</button>${u.role=='Admin'?(u==me?'':` <button class="btn g s" onclick="setRole(${u.id},'HR')">Jadikan HR</button>`):` <button class="btn g s" onclick="setRole(${u.id},'Admin')">Jadikan Admin</button> <button class="btn s" onclick="transferAdmin(${u.id})">Alihkan Admin ke akun ini</button>`} <button class="btn r s" onclick="delUser(${u.id})">Hapus</button></td></tr>`).join('')}</table></div>`:''}
+<p class="note">Semua akun berperan Admin dapat menambah, mengubah, mereset, dan menghapus akun lain. Disarankan memiliki minimal dua Admin. Mode demo: akun dan kata sandi (disimpan dalam bentuk hash) berada di browser perangkat ini. Untuk penggunaan banyak pengguna lintas perangkat dan pengiriman email sungguhan, dibutuhkan server autentikasi.</p>`};
+function setA(id,v){(S.att[attDate]=S.att[attDate]||{})[id]=v;save();render()}
+function allH(){S.att[attDate]=Object.fromEntries(S.emp.map(e=>[e.id,'Hadir']));save();render()}
+function addL(){if(!S.emp.length){toast('Tambahkan karyawan dulu.');return}modal('Ajukan Cuti',[['emp','Karyawan','sel',S.emp.map(e=>[e.id,e.nama])],['jenis','Jenis cuti','sel',['Cuti Tahunan','Cuti Sakit','Cuti Melahirkan','Cuti Penting']],['mulai','Tanggal mulai','date'],['hari','Jumlah hari','number'],['ket','Keterangan','text']],{jenis:'Cuti Tahunan',mulai:today(),hari:1,ket:'-'},o=>S.leave.push({...o,emp:+o.emp,id:S.nid++,st:'Menunggu'}))}
+function decL(id,ok){const l=S.leave.find(x=>x.id==id),e=S.emp.find(x=>x.id==l.emp);if(ok&&l.jenis=='Cuti Tahunan'&&e){if(e.sisa<l.hari){toast('Sisa cuti tidak cukup.');return}e.sisa-=l.hari}l.st=ok?'Disetujui':'Ditolak';save();render()}
+function delL(id){S.leave=S.leave.filter(l=>l.id!=id);save();render()}
+function addC(){modal('Tambah Kandidat',[['nama','Nama','text'],['posisi','Posisi dilamar','text'],['tahap','Tahap','sel',TH]],{tahap:TH[0]},o=>S.cand.push({...o,id:S.nid++}))}
+function movC(id,t){S.cand.find(c=>c.id==id).tahap=t;save();render()}
+function delC(id){S.cand=S.cand.filter(c=>c.id!=id);save();render()}
+initScreens();render();
+</script></body></html>
